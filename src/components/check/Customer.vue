@@ -6,10 +6,10 @@
         border-variant="primary"
     >
       <template #header>Customer Details</template>
-      <b-img :src="image" alt="User's Image"></b-img>
+      <b-img :src="image" alt="User's Image" height="150px;" center></b-img>
 
       <b-card-text>
-        ID: {{customer.CUSTOMER_ID}} <br>
+        <hr>
         Username: {{customer.USERNAME}} <br>
         Password: {{customer.PASSWORD}} <br>
         Email: {{customer.EMAIL}} <br>
