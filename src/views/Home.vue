@@ -3,9 +3,9 @@
       <h1>This is Home Page</h1>
       <router-link
               tag="span"
-              to="/about"
+              to="/auth/signin"
       >
-        <b-button variant="dark">About</b-button>
+        <b-button variant="dark">SignIn</b-button>
       </router-link>
     <br><br>
     <Customers></Customers>

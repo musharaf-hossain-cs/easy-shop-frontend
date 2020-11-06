@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: '/',
     component: Home
   },
   {
@@ -22,12 +22,11 @@ const routes = [
   },
   {
     path: '/auth',
-    name: 'Auth',
     component: () => import('../views/auth/Auth'),
     children: [
       {
         path: '',
-        name: 'AuthHome',
+        name: 'Auth',
         component: () => import('../views/auth/AuthHome')
       },
       {

@@ -9,6 +9,7 @@
                 v-model="username"
                 required
                 placeholder="Enter Username"
+                :state="usernameState"
             ></b-input>
           </b-form-group>
 
@@ -21,7 +22,11 @@
                 type="password"
             ></b-input>
           </b-form-group>
-          <b-button variant="primary" block>Sign In</b-button>
+          <b-button
+              variant="primary"
+              block
+              @click="atClickSignIn"
+          >Sign In</b-button>
         </b-form>
       <hr>
       <span>New in easyShop? </span>
@@ -35,13 +40,58 @@
 </template>
 
 <script>
+let socket;
 export default {
   name: "Login",
   data(){
     return {
       username: '',
-      password: ''
+      password: '',
+      inputValidity: true
     }
+  },
+  methods: {
+
+    checkValidity(){
+      return this.inputValidity && this.password !== '' && this.username !== '';
+    },
+
+    atClickSignIn(){
+      if(this.checkValidity()){
+        const data = {
+          command: 'login',
+          username: this.username,
+          password: this.password
+        };
+        socket.emit('login',data);
+      }else{
+        console.log("Invalid Login Input");
+      }
+
+    }
+  },
+  computed: {
+    usernameState(){
+      if(this.username === '') return null;
+      else{
+
+        let format = /[!@#$%^&*() _+\-=\[\]{};':"\\|,.<>\/?]/;
+
+        if(this.username.match(format)){
+          this.inputValidity = false;
+          return false;
+        }else{
+          this.inputValidity = true;
+          return null;
+        }
+      }
+    }
+  },
+  created() {
+    socket = this.$store.getters.getSocket;
+    socket.on('loginInfo',(data)=>{
+      console.log(data);
+    });
   }
 }
 </script>

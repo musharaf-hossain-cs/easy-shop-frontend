@@ -2,6 +2,14 @@
   <div class="row" style="background-color:#a7ffeb;">
     <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 auto">
       <h3 style="margin-bottom: 20px; text-align: center">Sign-Up for easyShop</h3>
+      <div style="text-align: center">
+        <span>Already have an account? </span>
+        <router-link
+            to="/auth/signin"
+            tag="a"
+        >Sign-In</router-link>
+      </div>
+
       <b-form>
         <b-form-group
             id="form-group-name"
@@ -117,7 +125,6 @@
                   button-only
                   right
                   aria-controls="dobText"
-                  @context="onContext"
                   :date-format-options="{day:'numeric',month: 'numeric',year:'numeric' }"
               ></b-datepicker>
             </b-input-group-append>
@@ -205,6 +212,14 @@
 
       </b-form>
 
+      <div style="text-align: center">
+        <span>Already have an account? </span>
+        <router-link
+            to="/auth/signin"
+            tag="a"
+        >Sign-In</router-link>
+      </div>
+
     </div>
 
   </div>
@@ -212,12 +227,11 @@
 </template>
 
 <script>
-import io from 'socket.io-client'
 let socket;
 export default {
   name: "SignUp",
   created() {
-    socket = io(this.$store.state.server);
+    socket = this.$store.getters.getSocket;
   },
   data(){
     return {
@@ -329,9 +343,6 @@ export default {
     }
   },
   methods:{
-    onContext(ctx){
-
-    },
     checkEmail(){
       let data = {
         command: 'checkEmail',

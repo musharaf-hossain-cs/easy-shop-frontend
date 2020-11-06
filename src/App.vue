@@ -11,7 +11,6 @@
 
 <script>
   import Navbar from './components/Navbar';
-  import io from 'socket.io-client';
   let socket;
   export default {
     name: 'App',
@@ -24,7 +23,7 @@
       //
     }),
     created() {
-      socket = io(this.$store.state.server);
+      socket = this.$store.getters.getSocket;
       let app = navigator.userAgent;
       let abc = {
         app

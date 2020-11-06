@@ -18,8 +18,7 @@
 
 <script>
 import Customer from "@/components/check/Customer";
-import io from 'socket.io-client';
-const socket = io('192.168.6.102:3000');
+let socket;
 
 export default {
   name: "Customers",
@@ -38,6 +37,9 @@ export default {
           this.customers = data;
         });
     }
+  },
+  created() {
+    socket = this.$store.getters.getSocket;
   }
 }
 </script>
