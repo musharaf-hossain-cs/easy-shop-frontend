@@ -179,6 +179,13 @@
             label-for="image"
             label="Choose Your Photo: "
         >
+          <b-img
+              center
+              :src="imageURL"
+              v-if="imageURL!=null"
+              alt="ProductImage"
+              width="100"
+          ></b-img>
           <b-form-file
               id="image"
               v-model="formData.image"
@@ -263,6 +270,7 @@ export default {
     }
   },
   computed: {
+    ///limit input length
     firstNameState(){
       if(this.formData.firstName === '') return null;
       else{

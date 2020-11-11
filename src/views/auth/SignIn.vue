@@ -88,9 +88,13 @@ export default {
     }
   },
   created() {
-    socket = this.$store.getters.getSocket;
+    let root = this;
+    socket = root.$store.getters.getSocket;
     socket.on('loginInfo',(data)=>{
       console.log(data);
+      if(data.success){
+        root.$store.commit('setUser',data.user);
+      }
     });
   }
 }

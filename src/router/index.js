@@ -2,9 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+import {authRoutes} from '../router/authRoute';
+import {productRoutes} from "@/router/productRoute";
+
 Vue.use(VueRouter)
 
 const routes = [
+    authRoutes,
+    productRoutes,
   {
     path: '/',
     name: '/',
@@ -19,28 +24,6 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
-  },
-  {
-    path: '/auth',
-    component: () => import('../views/auth/Auth'),
-    children: [
-      {
-        path: '',
-        name: 'Auth',
-        component: () => import('../views/auth/AuthHome')
-      },
-      {
-        path: 'signin',
-        name: 'SignIn',
-        component: () => import('../views/auth/SignIn')
-      },
-      {
-        path: 'signup',
-        name: 'SignUp',
-        component: () => import('../views/auth/SignUp')
-      }
-
-    ]
   },
   {
     path: '/checkout',

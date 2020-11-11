@@ -7,6 +7,13 @@
       >
         <b-button variant="dark">SignIn</b-button>
       </router-link>
+    .
+    <router-link
+        tag="span"
+        to="/products"
+    >
+      <b-button variant="dark">Products</b-button>
+    </router-link>
     <br><br>
     <Customers></Customers>
   </div>

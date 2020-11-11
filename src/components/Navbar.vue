@@ -22,16 +22,43 @@
                 </router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn text >
-                <span>User</span>
-                <b-icon icon="caret-down-fill"></b-icon>
+
+            <b-dropdown
+                :text="userFirstName"
+                variant="outline"
+                class="m-2"
+            >
+              <b-dropdown-group align="center">
+                <b-dropdown-header>
+                  <b-avatar
+                      variant="primary"
+                      text="BV"
+                      :src="require('./abc.png')"
+                      size="150"
+                  ></b-avatar>
+
+                  <h2>{{userFirstName}} {{userLastName}}</h2>
+                  <h3>({{getUserName}})</h3>
+                </b-dropdown-header>
+              </b-dropdown-group>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item >
+                <b-btn variant="primary" block>Dashboard</b-btn>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <b-btn variant="primary" block>Signout</b-btn>
+              </b-dropdown-item>
+
+               <!-- <b-icon icon="caret-down-fill"></b-icon>   -->
                <!-- <v-icon flat right>mdi-exit-to-app</v-icon>  -->
-            </v-btn>
+            </b-dropdown>
             <v-btn
                     @click="cartDrawer=!cartDrawer"
                     text
             >
+              <span>Cart</span>
                 <v-icon>mdi-cart</v-icon>
+
             </v-btn>
         </v-app-bar>
 
@@ -54,14 +81,31 @@
 </template>
 
 <script>
-    export default {
-        name: "Navbar",
-        data(){
-            return{
-                cartDrawer: false
-            }
-        }
+export default {
+  name: "Navbar",
+  data(){
+    return{
+      cartDrawer: false,
+      user: null
     }
+  },
+  created() {
+
+  },
+  computed:{
+    userFirstName(){
+      this.user = this.$store.getters.getUser;
+      return this.user.first_name;
+    },
+    userLastName(){
+      return this.$store.getters.getUser.last_name;
+    },
+    getUserName(){
+      return this.$store.getters.getUser.username;
+    }
+
+  }
+}
 </script>
 
 <style scoped>
