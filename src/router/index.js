@@ -1,40 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
-import {authRoutes} from '../router/authRoute';
+import {authRoutes} from '@/router/authRoute';
 import {productRoutes} from "@/router/productRoute";
+import {adminRoutes} from "@/router/admin-routes/adminRoutes";
+import {root, home, redirect} from "@/router/homeRoutes";
 
 Vue.use(VueRouter)
 
 const routes = [
     authRoutes,
+    adminRoutes,
     productRoutes,
-  {
-    path: '/',
-    name: '/',
-    component: Home
-  },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
-  },
-  {
-    path: '/checkout',
-    name: 'Checkout',
-    component: () => import('../views/Checkout')
-  },
-  {
-    path: '/user',
-    name: 'User',
-    component: () => import('../views/User')
-  }
+    root,
+    home,
+    redirect
 ]
 
 const router = new VueRouter({

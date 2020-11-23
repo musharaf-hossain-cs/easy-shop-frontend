@@ -1,12 +1,12 @@
 <template>
-<div>
-  <h3>Products Page</h3>
-</div>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-name: "Products"
+name: "Product"
 }
 </script>
 

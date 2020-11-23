@@ -25,13 +25,13 @@
             label="Product Description:"
             label-for="product-description"
         >
-          <b-form-input
+          <b-form-textarea
               id="product-description"
               v-model="formData.description"
               placeholder="Description Here"
               style="margin: 10px;"
               autocomplete="off"
-          ></b-form-input>
+          ></b-form-textarea>
         </b-form-group>
         <b-form-group
             id="form-group-brand"
@@ -139,8 +139,18 @@
 </template>
 
 <script>
+let socket;
 export default {
   name: "InsertProduct",
+  created() {
+    socket = this.$store.getters.getSocket;
+    socket.on('insertProductRes', (data)=>{
+      if(data.success){
+        this.onReset();
+        this.$router.push('/admin/products');
+      }
+    });
+  },
   data(){
     return {
       formData: {
@@ -187,11 +197,33 @@ export default {
       img.src = this.imageURL;
     },
     onSubmit(){
-
+      let data = {
+        command: 'insert',
+        tablename: 'PRODUCT_MODELS',
+        id: '',
+        image:this.imageBlob,
+        modelName: this.formData.model,
+        category: this.formData.category,
+        brand: this.formData.brand,
+        price: this.formData.price,
+        stock: this.formData.stock,
+        description: this.formData.description,
+        sold: 0
+      };
+      socket.emit('insert',data);
     },
     onReset(){
-
+      this.formData.model = '';
+      this.formData.category = '';
+      this.formData.brand = '';
+      this.formData.price = 0;
+      this.formData.stock = 0;
+      this.formData.description = '';
+      this.formData.image = null;
     }
+  },
+  computed: {
+
   }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
 <div>
-  <h3>Products Page</h3>
+  <h3>Admin Dashboard</h3>
 </div>
 </template>
 
 <script>
 export default {
-name: "Products"
+name: "AdminDashboard"
 }
 </script>
 

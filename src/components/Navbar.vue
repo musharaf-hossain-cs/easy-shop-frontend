@@ -33,7 +33,7 @@
                   <b-avatar
                       variant="primary"
                       text="BV"
-                      :src="require('./abc.png')"
+                      :src="require('../assets/abc.png')"
                       size="150"
                   ></b-avatar>
 

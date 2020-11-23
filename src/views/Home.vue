@@ -10,9 +10,9 @@
     .
     <router-link
         tag="span"
-        to="/products"
+        to="/admin"
     >
-      <b-button variant="dark">Products</b-button>
+      <b-button variant="dark">Admin</b-button>
     </router-link>
     <br><br>
     <Customers></Customers>

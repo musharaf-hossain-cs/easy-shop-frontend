@@ -9,6 +9,7 @@
         <Customer
             v-for="customer in customers"
             :customer="customer"
+            :key="customer.CUSTOMER_ID"
         ></Customer>
       </b-card-group>
 

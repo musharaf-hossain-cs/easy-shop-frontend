@@ -13,7 +13,9 @@ export default new Vuex.Store({
       last_name: 'LastName',
       username: 'Username',
       token: ''
-    }
+    },
+    isAdmin: true,
+    products: []
   },
   getters: {
     getServer: state => {
@@ -24,12 +26,21 @@ export default new Vuex.Store({
     },
     getUser: state => {
       return state.User;
+    },
+    isAdmin: state => {
+      return state.isAdmin;
+    },
+    getProducts: (state) => {
+      return state.products;
     }
   },
   mutations: {
     setUser(state,user){
       state.User = user;
       console.log(user);
+    },
+    setProducts(state,products){
+      state.products = products;
     }
   },
   actions: {
