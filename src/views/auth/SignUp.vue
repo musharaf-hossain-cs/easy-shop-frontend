@@ -239,6 +239,12 @@ export default {
   name: "SignUp",
   created() {
     socket = this.$store.getters.getSocket;
+    socket.on('insertCustomerRes', (data)=>{
+      if(data.success){
+        this.onReset();
+        this.$router.push('/auth/signin');
+      }
+    });
   },
   data(){
     return {
@@ -273,6 +279,10 @@ export default {
     ///limit input length
     firstNameState(){
       if(this.formData.firstName === '') return null;
+      if(this.formData.firstName.length>=30){
+        alert('Maximum length exceeded!');
+        return false;
+      }
       else{
 
         let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
@@ -283,6 +293,10 @@ export default {
     },
     lastNameState(){
       if(this.formData.lastName === '') return null;
+      if(this.formData.lastName.length>=30){
+        alert('Maximum length exceeded!');
+        return false;
+      }
       else{
 
         let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
@@ -293,6 +307,10 @@ export default {
     },
     usernameState(){
       if(this.formData.username === '') return null;
+      if(this.formData.username.length>=30){
+        alert('Maximum length exceeded!');
+        return false;
+      }
       else{
 
         let format = /[!@#$%^&*() _+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -305,6 +323,10 @@ export default {
     passwordState(){
       /// One Uppercase, One lowercase, One Digit, minimum 6 characters
       if(this.formData.password.length === 0) return null;
+      if(this.formData.password.length>=30){
+        alert('Maximum length exceeded!');
+        return false;
+      }
       let passw = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
       return !!this.formData.password.match(passw);
     },
@@ -314,10 +336,18 @@ export default {
     },
     addressState(){
       if(this.formData.address === '') return null;
+      if(this.formData.address.length>=100){
+        alert('Maximum length exceeded!');
+        return false;
+      }
       return this.formData.address.length >= 5;
     },
     emailState(){
       if(this.formData.email === '') return null;
+      if(this.formData.email.length>=320){
+        alert('Maximum length exceeded!');
+        return false;
+      }
       if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.formData.email)))
         return false;
       return this.emailCheck;

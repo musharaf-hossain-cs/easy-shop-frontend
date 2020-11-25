@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <v-app-bar app>
+        <v-app-bar app class="green lighten-4">
             <v-toolbar-title>
                 <router-link
                         tag="span"
@@ -9,7 +9,7 @@
                 >
                     <v-btn class="align-center" style="height: 50px" text>
                         <v-img
-                                src="../assets/abc.png"
+                                :src="require('../assets/ProjectLogo.png')"
                                 alt="EasyShop Logo"
                                 class="shrink mr-2"
                                 contain
@@ -27,13 +27,14 @@
                 :text="userFirstName"
                 variant="outline"
                 class="m-2"
+                block
             >
               <b-dropdown-group align="center">
                 <b-dropdown-header>
                   <b-avatar
                       variant="primary"
-                      text="BV"
-                      :src="require('../assets/abc.png')"
+                      text="USER"
+                      :src="require('../assets/ProjectLogo.png')"
                       size="150"
                   ></b-avatar>
 

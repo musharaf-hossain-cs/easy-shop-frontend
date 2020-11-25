@@ -2,7 +2,7 @@
 <div v-if="loaded">
   <div class="row">
     <div class="col-sm-12 col-md-5" style="text-align: center">
-      <h3 style="text-align: left">Product's Image:</h3>
+      <h4 style="text-align: left">{{product.CATEGORY}} > <b>{{product.MODEL_NAME}}</b></h4>
       <b-img
           :src="imageURL"
           alt="Product's Image"
@@ -49,7 +49,8 @@ export default {
           'Model Name:': this.product.MODEL_NAME,
           'Brand:': this.product.BRAND,
           'Category: ': this.product.CATEGORY,
-          'Price: ': this.product.PRICE,
+          'Price: ': 'TK.'+this.product.PRICE,
+          'Discount: ': this.product.DISCOUNT+'%',
           'Stock:': this.product.STOCK,
           'Sold:':this.product.SOLD,
           'Description:':this.product.DESCRIPTION
@@ -76,6 +77,8 @@ export default {
           root.loaded = true;
         };
         reader.readAsDataURL(blob);
+      }else{
+        root.$router.push('/admin/products');
       }
 
     });

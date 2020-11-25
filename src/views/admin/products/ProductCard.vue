@@ -10,7 +10,8 @@
 
       <b-card-text>
         <hr>
-        Price: TK.{{product.PRICE}} ({{status}})
+        Price: TK.{{product.PRICE}} (-{{product.DISCOUNT}}%)<br>
+        ({{status}})
       </b-card-text>
       <template #footer>
         <b-button

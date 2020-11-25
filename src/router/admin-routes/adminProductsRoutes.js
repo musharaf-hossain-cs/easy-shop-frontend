@@ -10,7 +10,7 @@ export const adminProductRoutes = {
         {
             path: 'insert',
             name: 'insert-product',
-            component: () => import('../../views/admin/products/InsertProduct')
+            component: () => import('../../views/admin/products/ProductInsert')
         },
         {
             path: 'product/:id/details',
@@ -20,7 +20,7 @@ export const adminProductRoutes = {
         {
             path: 'product/:id/edit',
             name: 'product-edit',
-            component: () => import('../../views/admin/products/EditProduct')
+            component: () => import('../../views/admin/products/ProductEdit')
         },
         {
             path: '*',

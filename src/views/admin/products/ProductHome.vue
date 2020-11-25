@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Product from './Product';
+import Product from './ProductCard';
 let socket;
 export default {
   name: "ProductHome",
