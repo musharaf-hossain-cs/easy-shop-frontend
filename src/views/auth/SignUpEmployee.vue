@@ -161,6 +161,19 @@
           ></b-input>
         </b-form-group>
         <b-form-group
+            id="form-group-job"
+            label-for="job"
+            label="Select Job: "
+        >
+          <b-form-select
+              id="job"
+              v-model="formData.job"
+              required
+              :options="jobOptions"
+              :state="jobState"
+          ></b-form-select>
+        </b-form-group>
+        <b-form-group
             id="form-group-gender"
             label-for="gender"
             label="Your Gender:"
@@ -239,11 +252,12 @@ export default {
   name: "SignUp",
   created() {
     socket = this.$store.getters.getSocket;
-    socket.on('insertCustomerRes', (data)=>{
+    socket.on('insertEmployeeRes', (data)=>{
+      console.log(data);
       if(data.success){
         this.onReset();
         this.$router.push('/auth/signin');
-        socket.off('insertCustomerRes');
+        socket.off('insertEmployeeRes');
       }
     });
   },
@@ -260,12 +274,19 @@ export default {
         mobile: '',
         dob:'',
         gender: '',
-        image: null
+        image: null,
+        job: null
       },
       genderOptions: [
         {value: 'Male', text: 'Male'},
         {value: 'Female', text: 'Female'},
         {value: 'Other', text: 'Other'}
+      ],
+      jobOptions: [
+        {text: 'Select Job', value: null},
+        {text: 'Accountant', value: 'Accountant'},
+        {text: 'Office Staff', value: 'Office Staff'},
+        {text: 'Delivery Boy', value: 'Delivery Boy'}
       ],
       imageURL: null,
       imageBlob: null,
@@ -353,7 +374,6 @@ export default {
         return false;
       return this.emailCheck;
 
-
     },
     mobileState(){
       if(this.formData.mobile === '') return null;
@@ -366,7 +386,10 @@ export default {
       phoneno = /^\(?[+]?([0-9]{5})\)?[-. ]?([0-9]{6})$/;
       return !!this.formData.mobile.match(phoneno);
 
-
+    },
+    jobState(){
+      if(this.formData.job == null) return null;
+      else return true;
     },
     dobState(){
       if(this.formData.dob === '') return null;
@@ -444,7 +467,7 @@ export default {
     checkForm(){
       return !!(this.firstNameState && this.lastNameState && this.usernameState && this.passwordState
           && this.confirmPasswordState && this.addressState && this.emailState && this.dobState
-          && this.mobileState && this.genderState && this.imageState);
+          && this.mobileState && this.genderState && this.imageState && this.jobState);
     },
     onReset(){
       this.formData.firstName = '';
@@ -459,12 +482,13 @@ export default {
       this.formData.gender = '';
       this.formData.image = null;
       this.submitAlert = false;
+      this.formData.job = null;
 
     },
     createData(){
       this.data = {
         command: 'insert',
-        tablename: 'CUSTOMERS',
+        tablename: 'EMPLOYEES',
         id: '',
         first_name: this.formData.firstName,
         image:this.imageBlob,
@@ -476,8 +500,8 @@ export default {
         mobile: this.formData.mobile,
         dob: this.formData.dob,
         gender: this.formData.gender,
-        type: 'Customer'
-
+        job: this.formData.job,
+        type: 'Employee'
       };
     },
     onSubmit(){
@@ -491,8 +515,6 @@ export default {
         socket.emit('insert',this.data);
 
         console.log('Submitted!');
-
-        this.onReset();
       }
 
     }

@@ -216,8 +216,8 @@ export default {
     priceState(){
       if(this.formData.newPrice===null || this.formData.newPrice===0
           || this.formData.newPrice==='') return null;
-      if(this.formData.newPrice>999999999){
-        alert('Maximum Limit Exceeded!');
+      if(this.formData.newPrice<0 || this.formData.newPrice>999999999){
+        alert('Out of Range!');
         return false;
       }
       return true;

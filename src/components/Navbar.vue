@@ -23,6 +23,14 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
+            <router-link
+                to="/notices"
+                tag="button"
+            >
+              <v-btn text>Notices</v-btn>
+            </router-link>
+
+
             <b-dropdown
                 :text="userFirstName"
                 variant="outline"
@@ -47,7 +55,7 @@
                 <b-btn variant="primary" block>Dashboard</b-btn>
               </b-dropdown-item>
               <b-dropdown-item>
-                <b-btn variant="primary" block>Signout</b-btn>
+                <b-btn variant="primary" block>Sign Out</b-btn>
               </b-dropdown-item>
 
                <!-- <b-icon icon="caret-down-fill"></b-icon>   -->

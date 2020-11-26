@@ -16,6 +16,11 @@ export const authRoutes = {
             path: 'signup',
             name: 'SignUp',
             component: () => import('../views/auth/SignUp')
+        },
+        {
+            path: 'signup-employee',
+            name: 'SignUpEmployee',
+            component: () => import('../views/auth/SignUpEmployee')
         }
 
     ]
