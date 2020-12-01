@@ -249,7 +249,7 @@
 <script>
 let socket;
 export default {
-  name: "SignUp",
+  name: "EmployeeSignUp",
   created() {
     socket = this.$store.getters.getSocket;
     socket.on('insertEmployeeRes', (data)=>{

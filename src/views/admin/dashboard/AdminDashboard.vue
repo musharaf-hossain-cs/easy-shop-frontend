@@ -1,12 +1,17 @@
 <template>
-<div>
-  <h3>Admin Dashboard</h3>
-</div>
+  <div class="container">
+    <monthly-salary></monthly-salary>
+    <sell-report></sell-report>
+  </div>
 </template>
 
 <script>
 export default {
-name: "AdminDashboard"
+  name: "AdminDashboard",
+  components:{
+    monthlySalary: ()=> import('./MonthlySalary'),
+    sellReport: ()=> import('./SellReport')
+  }
 }
 </script>
 

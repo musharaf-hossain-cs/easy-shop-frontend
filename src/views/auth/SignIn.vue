@@ -34,6 +34,12 @@
           to="/auth/signup"
           tag="a"
       >Sign Up</router-link>
+      <br>
+      <span>Want a job? </span>
+      <router-link
+          to="/notices"
+          tag="a"
+      >See Notices</router-link>
 
     </div>
   </div>
@@ -93,7 +99,9 @@ export default {
     socket.on('loginInfo',(data)=>{
       console.log(data);
       if(data.success){
+        socket.off('loginInfo');
         root.$store.commit('setUser',data.user);
+        root.$router.push('/home');
       }
     });
   }

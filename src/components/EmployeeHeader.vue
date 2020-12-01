@@ -1,33 +1,32 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand><b>Admin</b></b-navbar-brand>
+      <b-navbar-brand><b>Employee</b></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <router-link
-              to="/admin/dashboard"
+              to="/employees/profile/dashboard"
               tag="b-nav-item"
           ><b>Dashboard</b></router-link>
           <router-link
-              to="/admin/products"
+              to="/employees/profile/history"
               tag="b-nav-item"
-          ><b>Products</b></router-link>
+          ><b>History</b></router-link>
           <router-link
-              to="/admin/employees"
+              to="/employees/profile/live-status"
               tag="b-nav-item"
-          ><b>Employess</b></router-link>
+          ><b>Live Status</b></router-link>
           <router-link
-              to="/admin/security"
+              to="/employees/profile/edit"
+              tag="b-nav-item"
+          ><b>Edit Profile</b></router-link>
+          <router-link
+              to="/employees/profile/security"
               tag="b-nav-item"
           ><b>Security</b></router-link>
-          <b-nav-item
-            @click="atClickSignOut"
-          >
-            <b>Sign Out</b>
-          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -39,26 +38,15 @@
             <b-icon icon="box-arrow-in-up-right" variant="light"></b-icon>
           </router-link>
         </b-navbar-nav>
-
-
-
       </b-collapse>
     </b-navbar>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "AdminHeader",
-        methods:{
-          atClickSignOut(){
-            if(confirm('Are you sure to Sign Out?')){
-              this.$store.commit('setUser',null);
-              this.$router.push('/');
-            }
-          }
-        }
-    }
+export default {
+  name: "EmployeeHeader"
+}
 </script>
 
 <style scoped>

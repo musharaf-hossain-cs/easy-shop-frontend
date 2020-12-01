@@ -8,13 +8,8 @@ export default new Vuex.Store({
   state: {
     server: '192.168.6.102:3000',
     socket: io('192.168.6.102:3000'),
-    User: {
-      first_name: 'User',
-      last_name: 'LastName',
-      username: 'Username',
-      token: ''
-    },
-    isAdmin: true,
+    User: null,
+    isAdmin: false,
     products: []
   },
   getters: {
@@ -41,6 +36,9 @@ export default new Vuex.Store({
     },
     setProducts(state,products){
       state.products = products;
+    },
+    setAdmin(state,status){
+      state.isAdmin = status;
     }
   },
   actions: {

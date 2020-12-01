@@ -1,12 +1,6 @@
 <template>
   <div class="container">
-    <router-link
-        tag="b-button"
-        to="/admin/employees/recruit"
-        class="success"
-    >
-      RecruitEmployee
-    </router-link>
+    <h3>Employees Home</h3>
   </div>
 </template>
 

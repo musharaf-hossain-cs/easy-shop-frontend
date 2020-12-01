@@ -1,48 +1,50 @@
 <template>
-  <div class="container">
-    <h3
-        style="margin-bottom: 20px; text-align: center"
-    >Recruit New Employee</h3>
-    <b-form>
-      <b-form-group
-        id="job-input"
-        label-for="job"
-        label="Select Job: "
-      >
-        <b-form-select
-            id="job"
-            v-model="formData.job"
-            required
-            :options="jobOptions"
-            :state="jobState"
-        ></b-form-select>
-      </b-form-group>
-      <b-form-group
-          id="quantity-input"
-          label-for="quantity"
-          label="Number of Posts:"
-      >
-        <b-form-input
-            id="quantity"
-            type="number"
-            v-model="formData.quantity"
-            required
-            :state="quantityState"
-            placeholder="Number of Posts"
-        ></b-form-input>
-      </b-form-group>
-    </b-form>
-    <div class="row">
-      <b-button
-          class="col-6"
-          @click="atClickPublish"
-          variant="success"
-      >Publish</b-button>
-      <b-button
-          class="col-6"
-          @click="atClickReset"
-          variant="danger"
-      >Reset</b-button>
+  <div class="row">
+    <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 auto">
+      <h3
+          style="margin-bottom: 20px; text-align: center"
+      >Recruit New Employee</h3>
+      <b-form>
+        <b-form-group
+            id="job-input"
+            label-for="job"
+            label="Select Job: "
+        >
+          <b-form-select
+              id="job"
+              v-model="formData.job"
+              required
+              :options="jobOptions"
+              :state="jobState"
+          ></b-form-select>
+        </b-form-group>
+        <b-form-group
+            id="quantity-input"
+            label-for="quantity"
+            label="Number of Posts:"
+        >
+          <b-form-input
+              id="quantity"
+              type="number"
+              v-model="formData.quantity"
+              required
+              :state="quantityState"
+              placeholder="Number of Posts"
+          ></b-form-input>
+        </b-form-group>
+      </b-form>
+      <div class="row">
+        <b-button
+            class="col-6"
+            @click="atClickPublish"
+            variant="success"
+        >Publish</b-button>
+        <b-button
+            class="col-6"
+            @click="atClickReset"
+            variant="danger"
+        >Reset</b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -119,5 +121,8 @@ export default {
 </script>
 
 <style scoped>
+.auto{
+  margin: auto;
+}
 
 </style>

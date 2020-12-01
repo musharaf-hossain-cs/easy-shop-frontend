@@ -14,19 +14,27 @@
     >
       <b-button variant="dark">Admin</b-button>
     </router-link>
-    <br><br>
-    <Customers></Customers>
+    .
+    <router-link
+        tag="span"
+        to="/employees"
+    >
+      <b-button variant="dark">Employees</b-button>
+    </router-link>
+    .
+    <router-link
+        tag="span"
+        to="/customers"
+    >
+      <b-button variant="dark">Customers</b-button>
+    </router-link>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Customers from '../components/check/Customers'
 
 export default {
-  name: 'Home',
-  components: {
-    Customers
-  }
+  name: 'Home'
 }
 </script>

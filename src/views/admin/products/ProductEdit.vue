@@ -1,85 +1,86 @@
 <template>
-<div v-if="loaded">
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <h4> {{product.CATEGORY}} > <b>{{product.MODEL_NAME}}</b></h4>
-      <b-img
-          :src="getImage"
-          alt="Product's Image"
-          class="col-sm-10 col-md-8"
-      ></b-img>
-      <b-form>
-        <b-form-file
-            id="image"
-            v-model="formData.image"
-            placeholder="Choose a image or drop it here..."
-            drop-placeholder="Drop image here..."
-            accept="image/*"
-            @change="atImageSelection"
-            :state="imageState"
-        ></b-form-file>
-      </b-form>
-    </div>
+  <div v-if="loaded">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h4> {{product.CATEGORY}} > <b>{{product.MODEL_NAME}}</b></h4>
+        <b-img
+            :src="getImage"
+            alt="Product's Image"
+            class="col-sm-10 col-md-8"
+        ></b-img>
+        <b-form>
+          <b-form-file
+              id="image"
+              v-model="formData.image"
+              placeholder="Choose a image or drop it here..."
+              drop-placeholder="Drop image here..."
+              accept="image/*"
+              @change="atImageSelection"
+              :state="imageState"
+          ></b-form-file>
+        </b-form>
+      </div>
 
-    <div class="col-sm-12 col-md-6">
-      <b-form>
-        <h5>Current Price: <b>TK.{{product.PRICE}}</b></h5>
-        <b-form-group
-          label="New Price (Taka):"
-          label-for="newPrice"
-        >
-          <b-form-input
-              id="newPrice"
-              v-model="formData.newPrice"
-              type="number"
-              placeholder="New Price Here..."
-              :state="priceState"
-          ></b-form-input>
-        </b-form-group>
-        <hr>
-        <h5>Current Stock: <b>{{product.STOCK}}</b></h5>
-        <b-form-group
-            label="Increase Stock By:"
-            label-for="increaseStock"
-        >
-          <b-form-input
-              id="increaseStock"
-              v-model="formData.newStock"
-              type="number"
-              placeholder="Add Stock..."
-              :state="stockState"
-          ></b-form-input>
-        </b-form-group>
-        <hr>
-        <h5>Current Discount: <b>{{product.DISCOUNT}}%</b></h5>
-        <b-form-group
-            label="New Discount (%):"
-            label-for="newDiscount"
-        >
-          <b-form-input
-              id="newDiscount"
-              v-model="formData.newDiscount"
-              type="number"
-              placeholder="New Discount..."
-              :state="discountState"
-          ></b-form-input>
-        </b-form-group>
-      </b-form>
+      <div class="col-sm-12 col-md-6">
+        <b-form>
+          <h5>Current Price: <b>TK.{{product.PRICE}}</b></h5>
+          <b-form-group
+            label="New Price (Taka):"
+            label-for="newPrice"
+          >
+            <b-form-input
+                id="newPrice"
+                v-model="formData.newPrice"
+                type="number"
+                placeholder="New Price Here..."
+                :state="priceState"
+            ></b-form-input>
+          </b-form-group>
+          <hr>
+          <h5>Current Stock: <b>{{product.STOCK}}</b></h5>
+          <b-form-group
+              label="Increase Stock By:"
+              label-for="increaseStock"
+          >
+            <b-form-input
+                id="increaseStock"
+                v-model="formData.newStock"
+                type="number"
+                placeholder="Add Stock..."
+                :state="stockState"
+            ></b-form-input>
+          </b-form-group>
+          <hr>
+          <h5>Current Discount: <b>{{product.DISCOUNT}}%</b></h5>
+          <b-form-group
+              label="New Discount (%):"
+              label-for="newDiscount"
+          >
+            <b-form-input
+                id="newDiscount"
+                v-model="formData.newDiscount"
+                type="number"
+                placeholder="New Discount..."
+                :state="discountState"
+            ></b-form-input>
+          </b-form-group>
+        </b-form>
+      </div>
+    </div>
+    <div class="row">
+      <b-button
+          class="col-6"
+          @click="atClickChange"
+          variant="success"
+      >Change</b-button>
+      <b-button
+          class="col-6"
+          @click="atClickReset"
+          variant="danger"
+      >Reset</b-button>
     </div>
   </div>
-  <div class="row">
-    <b-button
-        class="col-6"
-        @click="atClickChange"
-        variant="success"
-    >Change</b-button>
-    <b-button
-        class="col-6"
-        @click="atClickReset"
-        variant="danger"
-    >Reset</b-button>
-  </div>
-</div>
+  <div v-else><h3>Loading...</h3></div>
 </template>
 
 <script>
@@ -266,7 +267,7 @@ export default {
       }else{
         root.$router.push('/admin/products');
       }
-
+      socket.off('getProduction');
     });
     socket.on('updateResponse', (res)=>{
       if(res.success){

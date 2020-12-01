@@ -44,9 +44,6 @@ export default {
   created() {
     let admin;
     admin = this.$store.getters.isAdmin;
-    if(!admin){
-      this.$router.push('/admin/notAdmin');
-    }
     socket = this.$store.getters.getSocket;
     socket.emit('sendProductsAdmin');
     socket.on('getProductsAdmin', (data)=>{

@@ -13,6 +13,15 @@ export default {
   name: "Admin",
   components:{
     AdminHeader
+  },
+  computed:{
+
+  },
+  created() {
+    let admin = this.$store.getters.isAdmin;
+    if(!admin){
+      this.$router.push('/not-admin');
+    }
   }
 }
 </script>

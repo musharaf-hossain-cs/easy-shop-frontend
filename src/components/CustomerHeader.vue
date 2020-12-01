@@ -1,33 +1,32 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand><b>Admin</b></b-navbar-brand>
+      <b-navbar-brand><b>Customer</b></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <router-link
-              to="/admin/dashboard"
+              to="/customers/profile/dashboard"
               tag="b-nav-item"
           ><b>Dashboard</b></router-link>
           <router-link
-              to="/admin/products"
+              to="/customers/profile/history"
               tag="b-nav-item"
-          ><b>Products</b></router-link>
+          ><b>Order History</b></router-link>
           <router-link
-              to="/admin/employees"
+              to="/customers/profile/live-status"
               tag="b-nav-item"
-          ><b>Employess</b></router-link>
+          ><b>Live Status</b></router-link>
           <router-link
-              to="/admin/security"
+              to="/customers/profile/edit"
+              tag="b-nav-item"
+          ><b>Edit Profile</b></router-link>
+          <router-link
+              to="/customers/profile/security"
               tag="b-nav-item"
           ><b>Security</b></router-link>
-          <b-nav-item
-            @click="atClickSignOut"
-          >
-            <b>Sign Out</b>
-          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -40,25 +39,26 @@
           </router-link>
         </b-navbar-nav>
 
-
-
+        <!--
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown right>
+            <template #button-content>
+              <em><b>User</b></em>
+            </template>
+            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+        -->
       </b-collapse>
     </b-navbar>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "AdminHeader",
-        methods:{
-          atClickSignOut(){
-            if(confirm('Are you sure to Sign Out?')){
-              this.$store.commit('setUser',null);
-              this.$router.push('/');
-            }
-          }
-        }
-    }
+export default {
+  name: "CustomerHeader"
+}
 </script>
 
 <style scoped>

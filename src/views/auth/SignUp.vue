@@ -22,8 +22,8 @@
               required
               placeholder="Enter First Name"
               style="margin: 10px;"
-              :state="firstNameState"
               autocomplete="off"
+              :state="firstNameState"
           ></b-form-input>
           <b-form-input
               id="lastName"
@@ -135,7 +135,7 @@
             label-for="address"
             label="Address: "
         >
-          <b-input
+          <b-form-textarea
               id="address"
               v-model="formData.address"
               required
@@ -143,7 +143,7 @@
               style="margin: 10px;"
               :state="addressState"
               autocomplete="off"
-          ></b-input>
+          ></b-form-textarea>
         </b-form-group>
         <b-form-group
             id="form-group-mobile"
@@ -277,7 +277,6 @@ export default {
     }
   },
   computed: {
-    ///limit input length
     firstNameState(){
       if(this.formData.firstName === '') return null;
       if(this.formData.firstName.length>=30){
@@ -341,7 +340,7 @@ export default {
         alert('Maximum length exceeded!');
         return false;
       }
-      return this.formData.address.length >= 5;
+      return this.formData.address.length >= 3;
     },
     emailState(){
       if(this.formData.email === '') return null;
@@ -352,8 +351,6 @@ export default {
       if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.formData.email)))
         return false;
       return this.emailCheck;
-
-
     },
     mobileState(){
       if(this.formData.mobile === '') return null;
@@ -365,8 +362,6 @@ export default {
       if(this.formData.mobile.match(phoneno)) return true;
       phoneno = /^\(?[+]?([0-9]{5})\)?[-. ]?([0-9]{6})$/;
       return !!this.formData.mobile.match(phoneno);
-
-
     },
     dobState(){
       if(this.formData.dob === '') return null;
@@ -392,6 +387,7 @@ export default {
       socket.emit('check', data);
       socket.on('checkEmail',(data)=>{
         this.emailCheck = data;
+        socket.off('checkEmail');
       });
     },
     checkUsername(){
