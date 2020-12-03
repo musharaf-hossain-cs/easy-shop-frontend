@@ -1,6 +1,6 @@
 export const customersRoutes = {
     path: '/customers',
-    component: () => import('../views/customers/Customers'),
+    component: () => import('@/views/customers/Customers'),
     children: [
         {
             path: '',

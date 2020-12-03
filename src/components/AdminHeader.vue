@@ -48,17 +48,33 @@
 </template>
 
 <script>
-    export default {
-        name: "AdminHeader",
-        methods:{
-          atClickSignOut(){
-            if(confirm('Are you sure to Sign Out?')){
-              this.$store.commit('setUser',null);
-              this.$router.push('/');
-            }
-          }
+let socket;
+import {mapActions} from 'vuex';
+export default {
+    name: "AdminHeader",
+    methods:{
+      ...mapActions([
+         'setUser',
+         'setAdmin'
+      ]),
+      atClickSignOut(){
+        if(confirm('Are you sure to Sign Out?')){
+          socket.emit('signout',{
+            token: this.$store.getters.getUser.token
+          });
+          this.$cookies.remove('token');
+          this.setAdmin(false);
+          this.setUser(null);
+          this.$router.push('/').catch((e)=>{
+            console.log('Routing error in AdminHeader.vue');
+          });
         }
+      }
+    },
+    created() {
+      socket = this.$store.getters.getSocket;
     }
+}
 </script>
 
 <style scoped>

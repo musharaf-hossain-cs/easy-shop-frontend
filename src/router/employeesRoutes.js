@@ -1,6 +1,6 @@
 export const employeesRoutes = {
     path: '/employees',
-    component: () => import('../views/employees/Employees'),
+    component: () => import('@/views/employees/Employees'),
     children: [
         {
             path: '',

@@ -15,15 +15,15 @@
       </b-card-text>
       <template #footer>
         <b-button
-            class="col-6"
+            class="col-5"
             variant="success"
             @click="atClickDetails"
         >Details</b-button>
         <b-button
-            class="col-6"
-            variant="danger"
-            @click="atClickEdit"
-        >Edit</b-button>
+            class="col-7"
+            :variant="isSelected?'danger':'info' "
+            @click="atClickAddorRemove"
+        >{{cartButtonName}}</b-button>
       </template>
     </b-card>
   </div>
@@ -40,18 +40,40 @@ export default {
   },
   methods: {
     atClickDetails(){
-      this.$router.push('/admin/products/product/'+this.product.MODEL_ID+'/details');
+      this.$router.push('/home/products/product/'+this.product.MODEL_ID+'/details')
+      .catch((e)=>{
+        console.log('Routing error in home/Product.vue');
+      });
     },
-    atClickEdit(){
-      this.$router.push('/admin/products/product/'+this.product.MODEL_ID+'/edit');
+    atClickAddorRemove(){
+      if(this.isSelected){
+        this.$store.dispatch('removeCartItem', this.product.MODEL_ID);
+      }else{
+        this.$store.dispatch('addCartItem', {
+          id: this.product.MODEL_ID,
+          name: this.product.MODEL_NAME
+        });
+      }
     }
   },
   computed:{
+    isSelected(){
+      let idx = this.$store.getters.getCurrentCart
+          .findIndex(item => item.id === this.product.MODEL_ID);
+      return idx >= 0;
+    },
     status(){
       if(this.product.STOCK>0)
         return 'Available';
       else
         return 'Out of Stock';
+    },
+    cartButtonName(){
+      if(this.isSelected){
+        return 'Remove from Cart';
+      }else{
+        return 'Add to Cart';
+      }
     }
   },
   created() {

@@ -2,13 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import {authRoutes} from '@/router/authRoute';
-import {productRoutes} from "@/router/productsRoutes";
 import {adminRoutes} from "@/router/admin-routes/adminRoutes";
-import {root, home, redirect} from "@/router/homeRoutes";
+import {root, redirect, alreadySignedIn} from "@/router/OtherRoutes";
 import {noticeRoutes} from "@/router/noticeRoutes";
 import {customersRoutes} from "@/router/customersRoutes";
 import {employeesRoutes} from "@/router/employeesRoutes";
 import {notAdminRoute} from "@/router/admin-routes/notAdminRoute";
+import {homeRoutes} from "@/router/homeRoutes";
+import {ordersRoutes} from "@/router/ordersRoutes";
 
 Vue.use(VueRouter)
 
@@ -16,12 +17,13 @@ const routes = [
     authRoutes,
     notAdminRoute,
     adminRoutes,
-    productRoutes,
     noticeRoutes,
     customersRoutes,
     employeesRoutes,
+    ordersRoutes,
+    homeRoutes,
     root,
-    home,
+    alreadySignedIn,
     redirect
 ]
 

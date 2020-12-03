@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="container">
     <h3>Job Notices</h3>
-    <job-notice
-        v-for="(notice,idx) in jobNotices"
-        :key="idx"
-        :notice="notice"
-    ></job-notice>
+    <div class="row">
+      <job-notice
+          v-for="(notice,idx) in jobNotices"
+          :key="idx"
+          :notice="notice"
+      ></job-notice>
+    </div>
+
   </div>
 </template>
 

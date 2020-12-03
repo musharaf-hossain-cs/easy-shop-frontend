@@ -127,6 +127,12 @@ export default {
         return;
       }
 
+      let newStock;
+      if(this.formData.newStock == null){
+        newStock = 0;
+      }else{
+        newStock = this.formData.newStock;
+      }
       let data = {
         command: 'update',
         tablename: 'product_models',
@@ -134,7 +140,8 @@ export default {
         fields: fields,
         hasImage: hasImage,
         image: this.newImageBlob,
-        id: this.id
+        id: this.id,
+        stock: newStock
       };
       console.log(data);
       socket.emit('update',data);

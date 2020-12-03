@@ -1,12 +1,23 @@
 <template>
-  <div>
-    <p>* Recruitment Notice:
-      We need <b>{{notice.VALUE}}</b> employee(s) for the
-        following post: <b>{{notice.FIELD}}</b>.
-        If interested, <router-link
-          tag="a"
-          to="/auth/signup-employee"
-      >Click Here</router-link> </p>
+  <div class="col-md-6 col-lg-4">
+    <b-card
+        :title="'Job: '+notice.FIELD"
+        header-bg-variant="info"
+        border-variant="primary"
+    >
+      <template #header>Recruitment Notice</template>
+      <b-card-text>
+        <hr>
+        Available Post: {{notice.VALUE}}
+      </b-card-text>
+      <template #footer>
+        <router-link
+            to="/auth/signup-employee"
+            tag="b-button"
+            class="success col-12"
+        >Apply for the Job</router-link>
+      </template>
+    </b-card>
 
   </div>
 </template>

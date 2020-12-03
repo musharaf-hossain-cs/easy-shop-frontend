@@ -1,7 +1,7 @@
 export const root = {
     path: '',
     name: 'admin',
-    component: () => import('../../views/admin/dashboard/AdminDashboard')
+    component: () => import('@/views/admin/dashboard/AdminDashboard')
 };
 export const dashboard = {
         path: 'dashboard',

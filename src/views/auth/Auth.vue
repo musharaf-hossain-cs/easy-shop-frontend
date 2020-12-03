@@ -6,7 +6,19 @@
 
 <script>
 export default {
-name: "Auth"
+  name: "Auth",
+  methods:{
+    isSignedIn(){
+      return this.$store.getters.getUser != null;
+    }
+  },
+  created() {
+    if(this.isSignedIn()){
+      this.$router.push('/already-signed-in').catch((e)=>{
+        console.log('Routing Error in Auth.vue');
+      })
+    }
+  }
 }
 </script>
 

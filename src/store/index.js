@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client'
 
+import * as getters from './getters';
+import * as mutations from './mutations';
+import * as actions from './actions';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -10,39 +14,12 @@ export default new Vuex.Store({
     socket: io('192.168.6.102:3000'),
     User: null,
     isAdmin: false,
-    products: []
+    products: null,
+    currentCart: []
   },
-  getters: {
-    getServer: state => {
-      return state.server;
-    },
-    getSocket: state => {
-      return state.socket;
-    },
-    getUser: state => {
-      return state.User;
-    },
-    isAdmin: state => {
-      return state.isAdmin;
-    },
-    getProducts: (state) => {
-      return state.products;
-    }
-  },
-  mutations: {
-    setUser(state,user){
-      state.User = user;
-      console.log(user);
-    },
-    setProducts(state,products){
-      state.products = products;
-    },
-    setAdmin(state,status){
-      state.isAdmin = status;
-    }
-  },
-  actions: {
-  },
+  getters,
+  mutations,
+  actions,
   modules: {
   }
 })

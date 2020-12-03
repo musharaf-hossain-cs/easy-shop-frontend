@@ -4,7 +4,7 @@ import {adminEmployeeRoutes} from "@/router/admin-routes/adminEmployeeRoute";
 
 export const adminRoutes = {
     path: '/admin',
-    component: () => import('../../views/admin/Admin'),
+    component: () => import('@/views/admin/Admin'),
     children:[
         root,
         adminProductRoutes,

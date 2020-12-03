@@ -1,28 +1,28 @@
 <template>
-<div v-if="loaded">
-  <div class="row">
-    <div class="col-sm-12 col-md-5" style="text-align: center">
-      <h4 style="text-align: left">{{product.CATEGORY}} > <b>{{product.MODEL_NAME}}</b></h4>
-      <b-img
-          :src="imageURL"
-          alt="Product's Image"
-          class="col-sm-12 col-md-10"
-      ></b-img>
+  <div v-if="loaded">
+    <div class="row">
+      <div class="col-sm-12 col-md-5" style="text-align: center">
+        <h4 style="text-align: left">{{product.CATEGORY}} > <b>{{product.MODEL_NAME}}</b></h4>
+        <b-img
+            :src="imageURL"
+            alt="Product's Image"
+            class="col-sm-12 col-md-10"
+        ></b-img>
+      </div>
+
+      <div class="col-sm-12 col-md-7">
+        <b-table striped stacked hover :items="tableData"></b-table>
+      </div>
+    </div>
+    <div>
+      <b-button
+          block
+          :variant="isSelected ? 'danger':'success'"
+          @click="atClickAddorRemove"
+      >{{cartButtonName}}</b-button>
     </div>
 
-    <div class="col-sm-12 col-md-7">
-      <b-table striped stacked hover :items="tableData"></b-table>
-    </div>
   </div>
-  <div>
-    <b-button
-        block
-        variant="success"
-        @click="atClickEdit"
-    >Edit Product Info</b-button>
-  </div>
-
-</div>
 </template>
 
 <script>
@@ -38,8 +38,15 @@ export default {
     }
   },
   methods:{
-    atClickEdit(){
-      this.$router.push('/admin/products/product/'+this.product.MODEL_ID+'/edit');
+    atClickAddorRemove(){
+      if(this.isSelected){
+        this.$store.dispatch('removeCartItem', this.product.MODEL_ID);
+      }else{
+        this.$store.dispatch('addCartItem', {
+          id: this.product.MODEL_ID,
+          name: this.product.MODEL_NAME
+        });
+      }
     }
   },
   computed:{
@@ -57,6 +64,18 @@ export default {
         }
       ];
       return item;
+    },
+    isSelected(){
+      let idx = this.$store.getters.getCurrentCart
+          .findIndex(item => item.id === this.product.MODEL_ID);
+      return idx >= 0;
+    },
+    cartButtonName(){
+      if(this.isSelected){
+        return 'Remove from Cart';
+      }else{
+        return 'Add to Cart';
+      }
     }
   },
   created() {
@@ -80,8 +99,7 @@ export default {
       }else{
         root.$router.push('/admin/products');
       }
-      socket.off('getProduct');
-
+      socket.off('getProduct')
     });
   }
 }

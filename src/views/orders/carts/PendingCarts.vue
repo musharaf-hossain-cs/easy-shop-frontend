@@ -1,12 +1,10 @@
 <template>
-  <div class="container">
-    <h1>Checkout Page</h1>
-  </div>
+  <div><h3>Pending Carts</h3></div>
 </template>
 
 <script>
 export default {
-  name: "Checkout"
+name: "PendingCarts"
 }
 </script>
 

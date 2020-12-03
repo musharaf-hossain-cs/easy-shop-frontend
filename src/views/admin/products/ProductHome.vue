@@ -21,9 +21,9 @@
     <div>
       <b-card-group>
         <app-product
-            v-for="product in products"
+            v-for="(product,index) in products"
             :product="product"
-            :key="product.PRODUCT_MODEL_ID"
+            :key="index"
         ></app-product>
       </b-card-group>
 
@@ -42,12 +42,11 @@ export default {
     }
   },
   created() {
-    let admin;
-    admin = this.$store.getters.isAdmin;
     socket = this.$store.getters.getSocket;
-    socket.emit('sendProductsAdmin');
-    socket.on('getProductsAdmin', (data)=>{
+    socket.emit('sendProducts');
+    socket.on('getProducts', (data)=>{
       this.products = data;
+      socket.off('getProducts');
     })
   },
   components:{

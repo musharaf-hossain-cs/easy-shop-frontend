@@ -1,6 +1,6 @@
 export const adminEmployeeRoutes = {
     path: 'employees',
-    component: () => import('../../views/admin/employees/Employees'),
+    component: () => import('@/views/admin/employees/Employees'),
     children: [
         {
             path: '',
@@ -10,7 +10,7 @@ export const adminEmployeeRoutes = {
         {
             path: 'recruit',
             name: 'recruit-employee',
-            component: () => import('../../views/admin/employees/RecruitEmployee')
+            component: () => import('@/views/admin/employees/RecruitEmployee')
         },
         {
             path: 'employee-list',
@@ -25,7 +25,7 @@ export const adminEmployeeRoutes = {
         {
             path: 'requests/:id/process',
             name: 'request-process',
-            component: () => import('../../views/admin/employees/ProcessRequest')
+            component: () => import('@/views/admin/employees/ProcessRequest')
         },
         {
             path: 'employee/:id/details',

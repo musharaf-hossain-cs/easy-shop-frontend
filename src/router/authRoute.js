@@ -1,26 +1,26 @@
 export const authRoutes = {
     path: '/auth',
-    component: () => import('../views/auth/Auth'),
+    component: () => import('@/views/auth/Auth'),
     children: [
         {
             path: '',
             name: 'Auth',
-            component: () => import('../views/auth/AuthHome')
+            component: () => import('@/views/auth/AuthHome')
         },
         {
             path: 'signin',
             name: 'SignIn',
-            component: () => import('../views/auth/SignIn')
+            component: () => import('@/views/auth/SignIn')
         },
         {
             path: 'signup',
             name: 'SignUp',
-            component: () => import('../views/auth/SignUp')
+            component: () => import('@/views/auth/SignUp')
         },
         {
             path: 'signup-employee',
             name: 'SignUpEmployee',
-            component: () => import('../views/auth/SignUpEmployee')
+            component: () => import('@/views/auth/SignUpEmployee')
         }
 
     ]

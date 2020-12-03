@@ -332,9 +332,12 @@ export default {
   },
   created() {
     socket = this.$store.getters.getSocket;
-    socket.emit('sendPerson',{
-      token: this.$store.getters.getUser.token
-    });
+    if(this.$store.getters.getUser != null){
+      socket.emit('sendPerson',{
+        token: this.$store.getters.getUser.token
+      });
+    }
+
     let root = this;
     socket.on('getPerson',(res)=>{
       if(res.length>0){

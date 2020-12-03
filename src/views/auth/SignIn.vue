@@ -100,7 +100,11 @@ export default {
       console.log(data);
       if(data.success){
         socket.off('loginInfo');
-        root.$store.commit('setUser',data.user);
+        root.$store.dispatch('setUser',data.user);
+        if(data.user.type.toLowerCase() === 'manager'){
+          root.$store.dispatch('setAdmin',true);
+        }
+        root.$cookies.set("token",data.user.token,"1d");
         root.$router.push('/home');
       }
     });
