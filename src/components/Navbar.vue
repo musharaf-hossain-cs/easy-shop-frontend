@@ -156,6 +156,7 @@ export default {
   methods:{
     ...mapActions([
       'setUser',
+      'setDeliveryBoy',
       'setAdmin'
     ]),
     atClickSignOut(){
@@ -165,6 +166,7 @@ export default {
         });
         //this.$store.dispatch('setUser',null);
         this.setUser(null);
+        this.setDeliveryBoy(false);
         this.$cookies.remove('token');
         this.$router.push('/auth/signin').catch((e)=>{
           console.log('Routing Error!');
@@ -208,16 +210,6 @@ export default {
     },
     isSignedIn(){
       return this.getUser != null;
-    },
-    isAdmin22(){
-      if(this.getUser == null) return false;
-
-      if(this.getUser.type.toLowerCase() === 'manager'){
-        this.$store.dispatch('setAdmin',true);
-      }else{
-        this.$store.dispatch('setAdmin',false);
-      }
-      return this.$store.getters.isAdmin;
     },
     titleStyle(){
       if(this.isMobile){

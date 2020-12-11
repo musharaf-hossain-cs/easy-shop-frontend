@@ -13,4 +13,13 @@ export const addCartItem = ({commit},payload) => {
 };
 export const removeCartItem = ({commit},payload) => {
     commit('removeCartItem',payload);
-}
+};
+export const resetCart = ({commit}) => {
+    commit('resetCart');
+};
+export const setApplicationJob = ({commit}, payload) => {
+    commit('setApplicationJob',payload);
+};
+export const setDeliveryBoy = ({commit}, payload) => {
+    commit('setDeliveryBoy',payload);
+};

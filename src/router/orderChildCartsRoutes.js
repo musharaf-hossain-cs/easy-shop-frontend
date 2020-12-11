@@ -21,6 +21,11 @@ export const orderChildCartsRoutes = {
             path: 'pending-carts',
             name: 'pending-carts',
             component: () => import('@/views/orders/carts/PendingCarts')
+        },
+        {
+            path: 'bought-carts/:id/details',
+            name: 'cart-details',
+            component: () => import('@/views/orders/carts/CartDetails')
         }
     ]
 };

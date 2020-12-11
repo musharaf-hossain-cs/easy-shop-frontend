@@ -15,7 +15,9 @@ export default new Vuex.Store({
     User: null,
     isAdmin: false,
     products: null,
-    currentCart: []
+    currentCart: [],
+    selectedJobForApplication: null,
+    isDeliveryBoy: false
   },
   getters,
   mutations,

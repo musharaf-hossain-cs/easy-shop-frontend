@@ -17,7 +17,8 @@ export default {
       socket.emit('signout', {
         token: this.$store.getters.getUser.token
       });
-      this.$store.commit('setUser',null);
+      this.$store.dispatch('setUser', null);
+      this.$store.dispatch('setAdmin',false);
       this.$cookies.remove('token');
       this.$router.push('/auth/signin').catch((e)=>{
         console.log('Routing Error in AlreadySignedIn.vue');

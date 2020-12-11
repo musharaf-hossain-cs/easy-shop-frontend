@@ -61,6 +61,7 @@
             id="form-group-password"
             label-for="password"
             label="Password: "
+            v-b-tooltip="passwordTooltip"
         >
           <b-input
               id="password"
@@ -237,16 +238,6 @@
 let socket;
 export default {
   name: "SignUp",
-  created() {
-    socket = this.$store.getters.getSocket;
-    socket.on('insertCustomerRes', (data)=>{
-      if(data.success){
-        this.onReset();
-        this.$router.push('/auth/signin');
-        socket.off('insertCustomerRes');
-      }
-    });
-  },
   data(){
     return {
       formData : {
@@ -273,7 +264,9 @@ export default {
       abc: 4,
       emailCheck: null,
       submitAlert: false,
-      data: null
+      data: null,
+      passwordTooltip: 'Requirement: a capital letter, a small letter, ' +
+          'a number and minimum 6 characters'
     }
   },
   computed: {
@@ -492,6 +485,16 @@ export default {
       }
 
     }
+  },
+  created() {
+    socket = this.$store.getters.getSocket;
+    socket.on('insertCustomerRes', (data)=>{
+      if(data.success){
+        this.onReset();
+        this.$router.push('/auth/signin');
+        socket.off('insertCustomerRes');
+      }
+    });
   }
 }
 

@@ -61,6 +61,7 @@
             id="form-group-password"
             label-for="password"
             label="Password: "
+            v-b-tooltip="passwordTooltip"
         >
           <b-input
               id="password"
@@ -171,6 +172,7 @@
               required
               :options="jobOptions"
               :state="jobState"
+              :disabled="true"
           ></b-form-select>
         </b-form-group>
         <b-form-group
@@ -250,17 +252,6 @@
 let socket;
 export default {
   name: "EmployeeSignUp",
-  created() {
-    socket = this.$store.getters.getSocket;
-    socket.on('insertEmployeeRes', (data)=>{
-      console.log(data);
-      if(data.success){
-        this.onReset();
-        this.$router.push('/auth/signin');
-        socket.off('insertEmployeeRes');
-      }
-    });
-  },
   data(){
     return {
       formData : {
@@ -294,7 +285,9 @@ export default {
       abc: 4,
       emailCheck: null,
       submitAlert: false,
-      data: null
+      data: null,
+      passwordTooltip: 'Requirement: a capital letter, a small letter, ' +
+          'a number and minimum 6 characters'
     }
   },
   computed: {
@@ -518,6 +511,18 @@ export default {
       }
 
     }
+  },
+  created() {
+    socket = this.$store.getters.getSocket;
+    this.formData.job = this.$store.getters.getApplicationJob;
+    socket.on('insertEmployeeRes', (data)=>{
+      console.log(data);
+      if(data.success){
+        this.onReset();
+        this.$router.push('/auth/signin');
+        socket.off('insertEmployeeRes');
+      }
+    });
   }
 }
 

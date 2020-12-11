@@ -18,3 +18,12 @@ export const removeCartItem = (state,payload) => {
         state.currentCart.splice(idx,1);
     }
 };
+export const resetCart = (state) => {
+    state.currentCart = [];
+};
+export const setApplicationJob = (state,payload) => {
+    state.selectedJobForApplication = payload;
+};
+export const setDeliveryBoy = (state,payload) => {
+    state.isDeliveryBoy = payload;
+};

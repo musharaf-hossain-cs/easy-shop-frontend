@@ -27,9 +27,9 @@ export const employeesRoutes = {
             component: () => import('@/views/employees/EmployeeEdit')
         },
         {
-            path: 'profile/live-status',
-            name: 'employee-live-status',
-            component: () => import('@/views/employees/LiveStatus')
+            path: 'profile/available-orders',
+            name: 'available-orders',
+            component: () => import('@/views/employees/AvailableOrders')
         },
         {
             path: 'profile/security',

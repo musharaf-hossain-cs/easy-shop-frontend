@@ -12,13 +12,15 @@
               tag="b-nav-item"
           ><b>Dashboard</b></router-link>
           <router-link
+              v-if="isDeliveryBoy"
               to="/employees/profile/history"
               tag="b-nav-item"
           ><b>History</b></router-link>
           <router-link
-              to="/employees/profile/live-status"
+              v-if="isDeliveryBoy"
+              to="/employees/profile/available-orders"
               tag="b-nav-item"
-          ><b>Live Status</b></router-link>
+          ><b>Available Orders</b></router-link>
           <router-link
               to="/employees/profile/edit"
               tag="b-nav-item"
@@ -45,7 +47,18 @@
 
 <script>
 export default {
-  name: "EmployeeHeader"
+  name: "EmployeeHeader",
+  data(){
+    return {
+    }
+  },
+  computed:{
+    isDeliveryBoy(){
+      return this.$store.getters.isDeliveryBoy;
+    }
+  },
+  created() {
+  }
 }
 </script>
 

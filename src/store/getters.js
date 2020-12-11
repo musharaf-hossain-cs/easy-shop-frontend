@@ -16,4 +16,10 @@ export const getProducts = (state) => {
 };
 export const getCurrentCart = (state) => {
     return state.currentCart;
-}
+};
+export const getApplicationJob = (state) => {
+    return state.selectedJobForApplication;
+};
+export const isDeliveryBoy = (state) => {
+    return state.isDeliveryBoy;
+};

@@ -63,6 +63,7 @@ export default {
     },
 
     atClickSignIn(){
+      console.log('here');
       if(this.checkValidity()){
         const data = {
           command: 'login',
@@ -97,15 +98,20 @@ export default {
     let root = this;
     socket = root.$store.getters.getSocket;
     socket.on('loginInfo',(data)=>{
-      console.log(data);
+      socket.off('loginInfo');
       if(data.success){
-        socket.off('loginInfo');
         root.$store.dispatch('setUser',data.user);
         if(data.user.type.toLowerCase() === 'manager'){
           root.$store.dispatch('setAdmin',true);
         }
         root.$cookies.set("token",data.user.token,"1d");
-        root.$router.push('/home');
+        root.$router.push('/home').catch((e)=>{
+          console.log('Routing Error in SignIn.vue');
+        });
+      }else{
+        alert('Please enter correct username and password!');
+        location.reload();
+        return false;
       }
     });
   }

@@ -11,11 +11,11 @@
         Available Post: {{notice.VALUE}}
       </b-card-text>
       <template #footer>
-        <router-link
-            to="/auth/signup-employee"
-            tag="b-button"
-            class="success col-12"
-        >Apply for the Job</router-link>
+        <b-button
+            @click="atClickApply"
+            class="col-12"
+            variant="success"
+        >Apply for the Job</b-button>
       </template>
     </b-card>
 
@@ -25,7 +25,15 @@
 <script>
 export default {
   name: "JobNotice",
-  props: ['notice']
+  props: ['notice'],
+  methods: {
+    atClickApply(){
+      this.$store.dispatch('setApplicationJob',this.notice.FIELD);
+      this.$router.push('/auth/signup-employee').catch((e)=>{
+        console.log('Routing Error in JobNotice.vue');
+      });
+    }
+  }
 }
 </script>
 

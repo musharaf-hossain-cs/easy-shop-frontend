@@ -13,19 +13,6 @@
         ></b-table>
       </div>
     </div>
-    <div class="container">
-      <div class="row info">
-        <h4 class="col-6"><b>Monthly Sell</b></h4>
-        <h4 class="col-6" align="right">Total: <b>TK.{{monthlyTotal}}</b></h4>
-      </div>
-      <div>
-        <b-table
-            :items="monthlyReport"
-            striped
-            hover
-        ></b-table>
-      </div>
-    </div>
   </div>
   <div v-else>
     <h3>Loading...</h3>
@@ -35,14 +22,12 @@
 <script>
 let socket;
 export default {
-  name: "SellReport",
+  name: "WeeklySellReport",
   data(){
     return {
       loaded: false,
       weeklySell: null,
-      monthlySell: null,
-      weeklyTotal: 0,
-      monthlyTotal: 0
+      weeklyTotal: 0
     }
   },
   computed:{
@@ -63,34 +48,14 @@ export default {
         items.push(item);
       }
       return items;
-    },
-    monthlyReport(){
-      let items = [];
-      let i=0;
-      this.monthlyTotal=0;
-      for(i;i<this.monthlySell.length;i++){
-        let sell = this.monthlySell[i];
-        let item = {
-          'Product ID': sell.MODEL_ID,
-          'Product Name': sell.MODEL_NAME,
-          'Sold':sell.SOLD,
-          'Cost':sell.TOTAL_COST
-        };
-        this.monthlyTotal += sell.TOTAL_COST;
-        items.push(item);
-      }
-      return items;
     }
   },
   created() {
     socket = this.$store.getters.getSocket;
-    socket.emit('sendReport', {
-      topic: 'sellReport'
-    });
-    socket.on('getReport', (res) => {
-      socket.off('getReport');
-      this.weeklySell = res[0];
-      this.monthlySell = res[1];
+    socket.emit('sendWeeklySellReport');
+    socket.on('getWeeklySellReport', (res) => {
+      socket.off('getWeeklySellReport');
+      this.weeklySell = res;
       this.loaded = true;
     });
   }

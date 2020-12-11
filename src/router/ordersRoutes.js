@@ -11,6 +11,16 @@ export const ordersRoutes = {
         },
         orderChildCartsRoutes,
         {
+            path: 'checkout/:id',
+            name: 'checkout',
+            component: () => import('@/views/orders/Checkout')
+        },
+        {
+            path: 'order/:id/details',
+            name: 'order-details',
+            component: () => import('@/views/orders/OrderDetails')
+        },
+        {
             path: '*',
             redirect: '/orders'
         }

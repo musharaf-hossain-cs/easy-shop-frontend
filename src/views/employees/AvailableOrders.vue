@@ -8,9 +8,8 @@
       <tr>
         <th>Order ID</th>
         <th>Order Date</th>
-        <th>Cart ID</th>
-        <th>Payment ID</th>
-        <th>Status</th>
+        <th>Customer Username</th>
+        <th>Customer Address</th>
       </tr>
       </thead>
       <tbody>
@@ -20,9 +19,8 @@
       >
         <td>{{order.ORDER_ID}}</td>
         <td>{{order.ORDER_DATE.split('T')[0]}}</td>
-        <td>{{order.CART_ID}}</td>
-        <td>{{order.PAYMENT_ID}}</td>
-        <td>{{order.STATUS}}</td>
+        <td>{{order.USERNAME}}</td>
+        <td>{{order.ADDRESS}}</td>
       </tr>
       </tbody>
     </table>
@@ -38,25 +36,33 @@
 <script>
 let socket;
 export default {
-  name: "OrderHistory",
+  name: "AvailableOrders",
   data(){
     return {
       loaded: false,
       orders: []
-    }
+    };
   },
-  methods:{
+  methods: {
     atRowClicked(orderId){
-      this.$router.push('/customers/profile/history/'+orderId+'/details').catch((e)=>{
-        console.log('Routing error in OrderHistory.vue');
+      this.$router.push('/orders/order/'+orderId+'/details').catch((e)=>{
+        console.log('Routing error in AvailableOrders.vue');
       });
     }
   },
   created() {
     socket = this.$store.getters.getSocket;
-    socket.emit('sendOrderHistory', this.$store.getters.getUser.token);
-    socket.on('getOrderHistory', (res)=>{
-      socket.off('getOrderHistory');
+    if(!this.$store.getters.isDeliveryBoy){
+      this.$router.push('/employees/profile/dashboard').catch((e)=>{
+        console.log('Routing Error in employees Dashboard.vue');
+      });
+    }
+    else{
+      socket.emit('sendAvailableOrders');
+    }
+
+    socket.on('getAvailableOrders', (res) => {
+      socket.off('getAvailableOrders');
       this.orders = res;
       this.loaded = true;
     });

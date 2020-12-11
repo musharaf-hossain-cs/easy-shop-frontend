@@ -204,7 +204,7 @@ export default {
         });
       }
       if(this.formData.newDiscount>=0 && this.formData.newDiscount<=100
-        && this.formData.newDiscount != null){
+        && this.formData.newDiscount != null && this.formData.newDiscount!==''){
         data.push({
           field: 'discount',
           value: this.formData.newDiscount
@@ -256,11 +256,11 @@ export default {
   created() {
     this.id = this.$route.params.id;
     socket = this.$store.getters.getSocket;
-    socket.emit('sendProductAdmin',{
+    socket.emit('sendProduct',{
       id: this.id
     });
     let root = this;
-    socket.on('getProductAdmin',(res)=>{
+    socket.on('getProduct',(res)=>{
       if(res.length > 0){
         this.product = res[0];
         const buffer = this.product.IMAGE;

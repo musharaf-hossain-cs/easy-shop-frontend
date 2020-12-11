@@ -23,6 +23,16 @@ export const adminProductRoutes = {
             component: () => import('@/views/admin/products/ProductEdit')
         },
         {
+            path: 'category-view',
+            name: 'admin-category-view',
+            component: () => import('@/views/admin/products/CategoryView')
+        },
+        {
+            path: 'search',
+            name: 'admin-search-view',
+            component: () => import('@/views/admin/products/SearchProducts')
+        },
+        {
             path: '*',
             redirect: '/admin/products'
         }

@@ -1,16 +1,19 @@
 <template>
   <div v-if="loaded">
-    <div class="row">
-      <h4 class="col-6"><b>Monthly Salary</b></h4>
-      <h4 class="col-6" align="right">Total: <b>TK.{{totalSalary}}</b></h4>
+    <div class="container">
+      <div class="row info">
+        <h4 class="col-6"><b>Monthly Salary</b></h4>
+        <h4 class="col-6" align="right">Total: <b>TK.{{totalSalary}}</b></h4>
+      </div>
+      <div>
+        <b-table
+            :items="tableData"
+            striped
+            hover
+        ></b-table>
+      </div>
     </div>
-    <div>
-      <b-table
-          :items="tableData"
-          striped
-          hover
-      ></b-table>
-    </div>
+
   </div>
   <div v-else><h3>Loading...</h3></div>
 </template>
@@ -52,6 +55,7 @@ export default {
       topic: 'MonthlySalary'
     });
     socket.on('getReport', (res) => {
+      socket.off('getReport');
       this.jobReport = res;
       this.loaded = true;
     });

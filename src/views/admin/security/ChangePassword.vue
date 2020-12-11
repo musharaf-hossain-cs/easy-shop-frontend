@@ -24,6 +24,7 @@
             id="form-group-new-password"
             label-for="new-password"
             label="New Password: "
+            v-b-tooltip="passwordTooltip"
         >
           <b-input
               id="new-password"
@@ -75,7 +76,9 @@ export default {
         confirmedPassword: null,
         password: null,
         oldPassword: null
-      }
+      },
+      passwordTooltip: 'Requirement: a capital letter, a small letter, ' +
+                  'a number and minimum 6 characters'
     }
   },
   methods:{

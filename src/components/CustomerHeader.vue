@@ -16,6 +16,7 @@
               tag="b-nav-item"
           ><b>Order History</b></router-link>
           <router-link
+              v-if="false"
               to="/customers/profile/live-status"
               tag="b-nav-item"
           ><b>Live Status</b></router-link>

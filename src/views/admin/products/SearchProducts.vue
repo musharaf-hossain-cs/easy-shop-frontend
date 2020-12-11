@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import ProductCard from "@/views/home/ProductCard";
+import ProductCard from "@/views/admin/products/ProductCard";
 let socket;
 export default {
   name: "SearchProducts",

@@ -26,15 +26,20 @@ export const customersRoutes = {
             name: 'customer-edit',
             component: () => import('@/views/customers/CustomerEdit')
         },
-        {
+/*        {
             path: 'profile/live-status',
             name: 'customer-live-status',
             component: () => import('@/views/customers/LiveStatus')
-        },
+        },*/
         {
             path: 'profile/security',
             name: 'customer-security',
             component: () => import('@/views/customers/security/Security')
+        },
+        {
+            path: 'profile/history/:id/details',
+            name: 'order-history-customer',
+            component: () => import('@/views/customers/OrderDetails')
         },
         {
             path: '*',

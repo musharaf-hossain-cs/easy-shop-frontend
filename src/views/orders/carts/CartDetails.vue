@@ -30,33 +30,9 @@
       <h3
           style="margin: 25px;text-align: center"
       >Total Price : <b>TK.{{totalPrice}}</b></h3>
-      <b-alert
-          variant="danger"
-          :show="!checkAvailability"
-      >Some cart items are not available now!</b-alert>
-    </div>
-    <div>
-      <h3 class="info text-light p-2">Payment Section:</h3>
-      <b-form>
-        <b-form-select
-            :options="paymentOptions"
-            v-model="paymentType"
-            style="margin: 10px;"
-            :state="paymentType!=null"
-        ></b-form-select>
-      </b-form>
-      <h4
-          style="margin: 10px;"
-      >Total Amount: <b>TK.{{totalPrice}}</b></h4>
-      <h4
-          style="margin: 10px;"
-      >Payment Stauts: <b>{{paymentStatus}}</b></h4>
-
-      <b-button
-          variant="success"
-          block
-          @click="makePayment"
-      >Make Payment</b-button>
+      <h3
+          style="margin: 25px;text-align: center"
+      >Payment Status : <b>PAID</b></h3>
     </div>
 
 
@@ -67,12 +43,11 @@
 <script>
 let socket;
 export default {
-  name: "Checkout",
+  name: "CartDetails",
   data(){
     return{
       loaded: false,
       cartId: null,
-      paymentStatus: 'Not Paid',
       cart: [],
       paymentType: null,
       paymentOptions: [
@@ -83,31 +58,6 @@ export default {
     }
   },
   methods:{
-    makePayment(){
-      if(this.paymentType==null){
-        alert('Payment type not selected!');
-        return;
-      }
-      if(this.checkAvailability){
-        let date = (new Date().toLocaleDateString()).split('/');
-        let today = date[2]+'/'+date[0]+'/'+date[1];
-        let data = {
-          id: '',
-          type: this.paymentType,
-          tablename: 'payments',
-          amount: this.totalPrice,
-          date: today,
-          status: 'Paid',
-          cartId: this.cartId,
-          customerToken: this.$store.getters.getUser.token
-        }
-        socket.emit('insert',data);
-      }
-      else{
-        alert('Items not available');
-      }
-    }
-
   },
   computed: {
     totalPrice(){
@@ -117,16 +67,6 @@ export default {
       }
       return price;
     },
-    checkAvailability(){
-      let available = true;
-      for(let i=0; i<this.cart.length;i++){
-        if(this.cart[i].QUANTITY>this.cart[i].STOCK){
-          available = false;
-          break;
-        }
-      }
-      return available;
-    }
   },
   created() {
     let user = this.$store.getters.getUser;
@@ -145,14 +85,6 @@ export default {
       socket.off('getCartItems');
       this.cart = res;
       this.loaded = true;
-    });
-    socket.on('paymentInfo',(res)=>{
-      socket.off('paymentInfo');
-      if(res.success){
-        this.$router.push('/orders/carts/bought-carts').catch((e)=>{
-          console.log('Routing error in Checkout.vue');
-        });
-      }
     });
   }
 }

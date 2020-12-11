@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <monthly-salary></monthly-salary>
-    <sell-report></sell-report>
+    <weekly-sell-report></weekly-sell-report>
+    <monthly-sell-report></monthly-sell-report>
   </div>
 </template>
 
@@ -10,7 +11,9 @@ export default {
   name: "AdminDashboard",
   components:{
     monthlySalary: ()=> import('./MonthlySalary'),
-    sellReport: ()=> import('./SellReport')
+    sellReport: ()=> import('./SellReport'),
+    weeklySellReport: ()=> import('./WeeklySellReport'),
+    monthlySellReport: ()=> import('./MonthlySellReport')
   }
 }
 </script>
